@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base -href=https://axurynn.github.io/2022-06-23-diginamic-d04-angular-1/tree/MarionBricout",
+    "build": "ng build --base-href=https://axurynn.github.io/2022-06-23-diginamic-d04-angular-1/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

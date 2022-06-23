@@ -20,7 +20,7 @@ run: npm install
 - name: Build
 run: npm run build
 - name: Generate 404.html file
-run: cp dist/top-colleagues/index.html dist/top-colleagues/404.html
+run: cp dist/2022-06-23-diginamic-d04-angular-1/index.html dist/2022-06-23-diginamic-d04-angular-1/404.html
 - name: Archive build
 if: success()
 uses: actions/upload-artifact@v1
@@ -43,4 +43,4 @@ uses: JamesIves/github-pages-deploy-action@releases/v3
 with:
 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 BRANCH: gh-pages
-FOLDER: deploy_dist/top-colleagues
+FOLDER: deploy_dist/2022-06-23-diginamic-d04-angular-1

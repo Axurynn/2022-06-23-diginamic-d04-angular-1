@@ -1,1 +1,3 @@
 # Formation Angular
+
+Marion Bricout

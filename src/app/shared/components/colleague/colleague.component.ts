@@ -24,13 +24,7 @@ export class ColleagueComponent implements OnInit {
     }
   }
 
-  pushHistory(num: number): void {
-    const test = {
-      id: this.colleague.id,
-      pseudo: this.colleague.pseudo,
-      score: num,
-      photo: this.colleague.photo,
-    };
+  pushHistory(): void {
     const voteDup = {
       colleague: { ...this.colleague },
       vote: LikeHate.LIKE,

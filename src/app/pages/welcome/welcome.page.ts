@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Colleague } from 'src/app/models/colleague';
+import { Vote } from 'src/app/models/vote';
 
 @Component({
   selector: 'tc-welcome',
@@ -73,7 +74,7 @@ export class WelcomePage implements OnInit {
     },
   ];
 
-  historique: Colleague[] = [];
+  votes: Vote[] = [];
 
   constructor() {}
 

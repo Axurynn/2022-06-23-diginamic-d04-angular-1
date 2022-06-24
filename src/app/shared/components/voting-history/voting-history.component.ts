@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Colleague } from 'src/app/models/colleague';
+import { Vote } from 'src/app/models/vote';
 
 @Component({
   selector: 'tc-voting-history',
@@ -7,8 +8,8 @@ import { Colleague } from 'src/app/models/colleague';
   styleUrls: ['./voting-history.component.scss'],
 })
 export class VotingHistoryComponent implements OnInit {
-  @Input() collegues!: Colleague[];
-  @Input() historique!: Colleague[];
+  // @Input() collegues!: Colleague[];
+  @Input() votes!: Vote[];
 
   constructor() {}
 

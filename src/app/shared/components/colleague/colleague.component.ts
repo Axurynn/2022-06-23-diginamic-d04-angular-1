@@ -1,5 +1,7 @@
 import { Colleague } from 'src/app/models/colleague';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Vote } from 'src/app/models/vote';
+import { LikeHate } from 'src/app/models/like-hate';
 
 @Component({
   selector: 'tc-colleague',
@@ -7,7 +9,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
   styleUrls: ['./colleague.component.scss'],
 })
 export class ColleagueComponent implements OnInit {
-  @Input() historique!: Colleague[];
+  @Input() votes!: Vote[];
   @Input() colleague!: Colleague;
 
   constructor() {}
@@ -29,7 +31,11 @@ export class ColleagueComponent implements OnInit {
       score: num,
       photo: this.colleague.photo,
     };
+    const voteDup = {
+      colleague: { ...this.colleague },
+      vote: LikeHate.LIKE,
+    };
 
-    this.historique.unshift(test);
+    this.votes.unshift(voteDup);
   }
 }

@@ -14,7 +14,7 @@ export class VotingHistoryComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  supprimer(event: any) {
-    event.target.offsetParent.remove();
+  supprimer(i: number) {
+    this.votes.splice(i, 1);
   }
 }

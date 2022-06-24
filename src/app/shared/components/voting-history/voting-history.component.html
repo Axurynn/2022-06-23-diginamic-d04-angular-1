@@ -1,7 +1,7 @@
-<h1>votes</h1>
+<h1>Historique</h1>
 <div>
 
-  <div *ngFor="let vote of votes" class="mx-3 my-3">
+  <div *ngFor="let vote of votes; let i = index;" class="mx-3 my-3">
     <div class="card p-4 d-flex flex-row rounded-3 justify-content-between" style="width: 100%">
       <img src={{vote.colleague.photo}} class="card-img-left" alt="Photo colleague"
         style="width: 100px; object-fit: cover;" />
@@ -10,7 +10,7 @@
         <p class="card-text">
           {{vote.colleague.pseudo}} est {{vote.colleague.score <= 0 ? "détesté" : "aimé" }} et a désormais un score de
             {{vote.colleague.score}} {{vote.colleague.score <=0 ? ":-(" : ":-)" }} </p>
-            <button type="button" class="btn btn-outline-dark mt-1 ms-1" (click)="supprimer($event)">Supprimer</button>
+            <button type="button" class="btn btn-outline-dark mt-1 ms-1" (click)="supprimer(i)">Supprimer</button>
       </div>
     </div>
   </div>

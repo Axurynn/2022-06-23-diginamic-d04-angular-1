@@ -1,3 +1,4 @@
+import { WelcomeModule } from './pages/welcome/welcome.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -6,7 +7,7 @@ import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, SharedModule],
+  imports: [BrowserModule, SharedModule, WelcomeModule],
   providers: [],
   bootstrap: [AppComponent],
 })

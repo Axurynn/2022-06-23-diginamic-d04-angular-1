@@ -1,0 +1,11 @@
+<div class="d-flex flex-row">
+  <div class="row">
+    <div class="col-9">
+      <button type="button" class="btn btn-outline-dark mt-1 ms-1">Rafraîchir</button>
+      <tc-colleague-list [collegues]="collegues" [historique]="historique"></tc-colleague-list>
+    </div>
+    <div class="col-3">
+      <tc-voting-history [historique]="historique"></tc-voting-history>
+    </div>
+  </div>
+</div>

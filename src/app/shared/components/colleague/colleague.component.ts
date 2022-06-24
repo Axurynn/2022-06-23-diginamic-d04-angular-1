@@ -1,5 +1,4 @@
 import { Colleague } from 'src/app/models/colleague';
-import { LikeHate } from './../../../models/like-hate';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({

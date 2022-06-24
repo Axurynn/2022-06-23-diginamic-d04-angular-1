@@ -19,8 +19,8 @@ export class ColleagueComponent implements OnInit {
     this.unScore = this.colleague.score;
   }
 
-  increment(event: number) {
-    if (event === 0) {
+  increment(event: string) {
+    if (event === 'LIKE') {
       this.colleague.score += 100;
     } else {
       this.colleague.score -= 100;

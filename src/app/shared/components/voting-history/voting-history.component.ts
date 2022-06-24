@@ -8,7 +8,6 @@ import { Vote } from 'src/app/models/vote';
   styleUrls: ['./voting-history.component.scss'],
 })
 export class VotingHistoryComponent implements OnInit {
-  // @Input() collegues!: Colleague[];
   @Input() votes!: Vote[];
 
   constructor() {}

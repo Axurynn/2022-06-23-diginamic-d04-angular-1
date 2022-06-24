@@ -1,6 +1,6 @@
+import { Colleague } from 'src/app/models/colleague';
 import { LikeHate } from './../../../models/like-hate';
-import { Colleague } from './../../../models/colleague';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'tc-colleague',
@@ -8,16 +8,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./colleague.component.scss'],
 })
 export class ColleagueComponent implements OnInit {
+  @Input() historique!: Colleague[];
   @Input() colleague!: Colleague;
-  unScore!: number;
 
   constructor() {}
 
   ngOnInit(): void {}
-
-  ngDoCheck(): void {
-    this.unScore = this.colleague.score;
-  }
 
   increment(event: string) {
     if (event === 'LIKE') {
@@ -25,5 +21,16 @@ export class ColleagueComponent implements OnInit {
     } else {
       this.colleague.score -= 100;
     }
+  }
+
+  pushHistory(num: number): void {
+    const test = {
+      id: this.colleague.id,
+      pseudo: this.colleague.pseudo,
+      score: num,
+      photo: this.colleague.photo,
+    };
+
+    this.historique.unshift(test);
   }
 }

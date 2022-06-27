@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Colleague } from 'src/app/models/colleague';
 import { Vote } from 'src/app/models/vote';
+import { ColleagueService } from 'src/app/providers/colleague.service';
 
 @Component({
   selector: 'tc-colleague-list',
@@ -8,10 +9,12 @@ import { Vote } from 'src/app/models/vote';
   styleUrls: ['./colleague-list.component.scss'],
 })
 export class ColleagueListComponent implements OnInit {
-  @Input() collegues!: Colleague[];
+  colleguesList: Colleague[] = [];
   @Input() votes!: Vote[];
 
-  constructor() {}
+  constructor(private colleagueService: ColleagueService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.colleguesList = this.colleagueService.getListeCollegues();
+  }
 }

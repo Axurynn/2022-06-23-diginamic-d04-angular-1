@@ -1,3 +1,4 @@
+import { VoteService } from './../../../providers/vote.service';
 import { Colleague } from 'src/app/models/colleague';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Vote } from 'src/app/models/vote';
@@ -9,12 +10,14 @@ import { LikeHate } from 'src/app/models/like-hate';
   styleUrls: ['./colleague.component.scss'],
 })
 export class ColleagueComponent implements OnInit {
-  @Input() votes!: Vote[];
+  votes: Vote[] = [];
   @Input() colleague!: Colleague;
 
-  constructor() {}
+  constructor(private voteService: VoteService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.votes = this.voteService.getListeVotes();
+  }
 
   increment(event: string) {
     if (event === 'LIKE') {
@@ -22,14 +25,16 @@ export class ColleagueComponent implements OnInit {
     } else {
       this.colleague.score -= 100;
     }
+    this.voteService.addVote(this.colleague, LikeHate.LIKE);
+    console.log(this.voteService.getListeVotes());
   }
 
-  pushHistory(): void {
-    const voteDup = {
-      colleague: { ...this.colleague },
-      vote: LikeHate.LIKE,
-    };
+  // pushHistory(): void {
+  //   const voteDup = {
+  //     colleague: { ...this.colleague },
+  //     vote: LikeHate.LIKE,
+  //   };
 
-    this.votes.unshift(voteDup);
-  }
+  //   this.votes.unshift(voteDup);
+  // }
 }

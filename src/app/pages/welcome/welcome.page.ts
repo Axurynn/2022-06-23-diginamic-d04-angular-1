@@ -74,7 +74,7 @@ export class WelcomePage implements OnInit {
   //   },
   // ];
 
-  votes: Vote[] = [];
+  // votes: Vote[] = [];
 
   constructor() {}
 

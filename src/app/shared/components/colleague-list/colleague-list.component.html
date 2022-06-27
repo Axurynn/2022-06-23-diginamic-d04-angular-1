@@ -1,5 +1,5 @@
-<div class="d-flex flex-row flex-wrap justify-content-around">
-  <div *ngFor="let collegue of colleguesList" class="mx-2 my-2">
+<div class="d-flex flex-row flex-wrap justify-content-around" *ngIf="colleguesList$ | async as listeCollegues">
+  <div *ngFor="let collegue of listeCollegues" class="mx-2 my-2">
     <tc-colleague [colleague]="collegue"></tc-colleague>
   </div>
 </div>

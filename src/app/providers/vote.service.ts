@@ -8,7 +8,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class VoteService {
-  listeVotes: Vote[] = [];
+  // listeVotes: Vote[] = [];
 
   private voteSubject = new Subject<Vote>();
 
@@ -20,13 +20,13 @@ export class VoteService {
       vote: vote,
     };
 
-    this.listeVotes.unshift(voteDup);
+    // this.listeVotes.unshift(voteDup);
     this.voteSubject.next(voteDup);
   }
 
-  getListeVotes(): Vote[] {
-    return this.listeVotes;
-  }
+  // getListeVotes(): Vote[] {
+  //   return this.listeVotes;
+  // }
 
   abonner(): Observable<Vote> {
     return this.voteSubject.asObservable();

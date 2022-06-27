@@ -11,6 +11,7 @@ import { LikeHate } from 'src/app/models/like-hate';
 })
 export class ColleagueComponent implements OnInit {
   votes: Vote[] = [];
+
   @Input() colleague!: Colleague;
 
   constructor(private voteService: VoteService) {}
@@ -25,16 +26,6 @@ export class ColleagueComponent implements OnInit {
     } else {
       this.colleague.score -= 100;
     }
-    this.voteService.addVote(this.colleague, LikeHate.LIKE);
-    console.log(this.voteService.getListeVotes());
+    this.voteService.addVote(this.colleague, event);
   }
-
-  // pushHistory(): void {
-  //   const voteDup = {
-  //     colleague: { ...this.colleague },
-  //     vote: LikeHate.LIKE,
-  //   };
-
-  //   this.votes.unshift(voteDup);
-  // }
 }

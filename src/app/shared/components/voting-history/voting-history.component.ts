@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, DoCheck } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Colleague } from 'src/app/models/colleague';
 import { Vote } from 'src/app/models/vote';
@@ -18,9 +18,16 @@ export class VotingHistoryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this.listeVotes = this.voteService.getListeVotes();
-    this.abonnement = this.voteService.abonner().subscribe((clicAddVote) => {
-      this.listeVotes.unshift(clicAddVote);
-    });
+    this.getVoteHistory();
+    this.voteService.abonner().subscribe(() => this.getVoteHistory());
+  }
+
+  getVoteHistory(): void {
+    this.abonnement = this.voteService
+      .getVoteList()
+      .subscribe((clicAddVote) => {
+        this.listeVotes = clicAddVote;
+      });
   }
 
   supprimer(i: number) {

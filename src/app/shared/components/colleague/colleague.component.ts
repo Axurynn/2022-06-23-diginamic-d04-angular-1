@@ -1,12 +1,6 @@
 import { VoteService } from './../../../providers/vote.service';
 import { Colleague } from 'src/app/models/colleague';
-import {
-  Component,
-  Input,
-  OnInit,
-  SimpleChanges,
-  OnDestroy,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Vote } from 'src/app/models/vote';
 import { LikeHate } from 'src/app/models/like-hate';
 import { Subscription } from 'rxjs';
@@ -16,33 +10,16 @@ import { Subscription } from 'rxjs';
   templateUrl: './colleague.component.html',
   styleUrls: ['./colleague.component.scss'],
 })
-export class ColleagueComponent implements OnInit, OnDestroy {
-  votes: Vote[] = [];
-
-  @Input() colleague!: Colleague;
-
-  abonnement!: Subscription;
+export class ColleagueComponent implements OnInit {
+  @Input() colleague!: any;
 
   constructor(private voteService: VoteService) {}
 
-  ngOnInit(): void {
-    this.abonnement = this.voteService.abonner().subscribe((clicAddVote) => {
-      this.votes.unshift(clicAddVote);
+  ngOnInit(): void {}
+
+  increment(event: LikeHate) {
+    this.voteService.addVote(this.colleague, event).subscribe((data) => {
+      this.colleague = data;
     });
-  }
-
-  increment(event: string) {
-    if (event === 'LIKE') {
-      this.colleague.score += 100;
-    } else {
-      this.colleague.score -= 100;
-    }
-    this.voteService.addVote(this.colleague, event);
-  }
-
-  ngOnDestroy(): void {
-    if (this.abonnement) {
-      this.abonnement.unsubscribe();
-    }
   }
 }

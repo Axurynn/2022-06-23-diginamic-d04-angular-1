@@ -16,8 +16,18 @@ export class CounterComponent implements OnInit, OnDestroy {
   constructor(private voteService: VoteService) {}
 
   ngOnInit(): void {
-    this.abonnement = this.voteService.abonner().subscribe((clicAddVote) => {
-      if (clicAddVote.vote === 'LIKE') {
+    // this.abonnement = this.voteService.getVoteList().subscribe((listeVotes) => {
+    //   listeVotes.forEach((vote) => {
+    //     // console.log(vote);
+    //     if (vote.vote === 'LIKE') {
+    //       this.totalVotesUp += 1;
+    //     } else {
+    //       this.totalVotesDown += 1;
+    //     }
+    //   });
+    // });
+    this.voteService.abonner().subscribe((vote) => {
+      if (vote.vote === 'LIKE') {
         this.totalVotesUp += 1;
       } else {
         this.totalVotesDown += 1;

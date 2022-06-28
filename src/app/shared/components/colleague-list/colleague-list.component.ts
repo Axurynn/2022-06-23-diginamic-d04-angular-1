@@ -10,12 +10,17 @@ import { ColleagueService } from 'src/app/providers/colleague.service';
   styleUrls: ['./colleague-list.component.scss'],
 })
 export class ColleagueListComponent implements OnInit {
-  colleguesList$!: Observable<Colleague[]>;
-  @Input() votes!: Vote[];
+  // colleguesList$!: Observable<Colleague[]>;
+  // @Input() votes!: Vote[];
+  colleguesList: Colleague[] = [];
+  abonnement!: Subscription;
 
   constructor(private colleagueService: ColleagueService) {}
 
   ngOnInit(): void {
-    this.colleguesList$ = this.colleagueService.getColleaguesList();
+    // this.colleguesList$ = this.colleagueService.getColleaguesList();
+    this.abonnement = this.colleagueService
+      .getColleaguesList()
+      .subscribe((colleague) => (this.colleguesList = colleague));
   }
 }

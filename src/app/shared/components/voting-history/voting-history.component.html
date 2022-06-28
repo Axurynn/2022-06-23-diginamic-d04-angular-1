@@ -8,8 +8,8 @@
       <div class="card-body d-flex flex-column align-items-start">
         <p class="card-title">{{vote.colleague.pseudo}}</p>
         <p class="card-text">
-          {{vote.colleague.pseudo}} est {{vote.colleague.score <= 0 ? "détesté" : "aimé" }} et a désormais un score de
-            {{vote.colleague.score}} {{vote.colleague.score <=0 ? ":-(" : ":-)" }} </p>
+          {{vote.colleague.pseudo}} est {{vote.score <= 0 ? "détesté" : "aimé" }} et a désormais un score de
+            {{vote.score}} {{vote.score <=0 ? ":-(" : ":-)" }} </p>
             <button type="button" class="btn btn-outline-dark mt-1 ms-1" (click)="supprimer(i)">Supprimer</button>
       </div>
     </div>

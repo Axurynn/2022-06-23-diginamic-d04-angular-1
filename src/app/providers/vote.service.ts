@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Colleague } from './../models/colleague';
+import { Colleague, FullColleague } from './../models/colleague';
 import { Injectable } from '@angular/core';
 import { Vote } from '../models/vote';
 import { LikeHate } from '../models/like-hate';
@@ -17,22 +17,26 @@ export class VoteService {
 
   addVote(colleague: Colleague, vote: LikeHate) {
     return this.http
-      .post<Colleague>(VOTES_URL, {
+      .post<FullColleague>(VOTES_URL, {
         pseudo: colleague.pseudo,
         like_hate: vote,
       })
       .pipe(
-        tap((colleague) =>
-          this.voteSubject.next({ colleague, vote, score: colleague.score })
+        tap((fullColleague) =>
+          this.voteSubject.next({
+            colleague: fullColleague,
+            vote,
+            score: fullColleague.score,
+          })
         )
       );
   }
 
-  abonner(): Observable<Vote> {
-    return this.voteSubject.asObservable();
-  }
-
   getVoteList() {
     return this.http.get<Vote[]>(VOTES_URL);
+  }
+
+  abonner(): Observable<Vote> {
+    return this.voteSubject.asObservable();
   }
 }

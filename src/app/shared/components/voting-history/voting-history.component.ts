@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, OnDestroy, DoCheck } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { Colleague } from 'src/app/models/colleague';
+import { TCEvent } from 'src/app/models/tcevent';
 import { Vote } from 'src/app/models/vote';
+import { TCEventService } from 'src/app/providers/tcevent.service';
 import { VoteService } from 'src/app/providers/vote.service';
 
 @Component({
@@ -13,21 +15,28 @@ export class VotingHistoryComponent implements OnInit, OnDestroy {
   listeVotes: Vote[] = [];
 
   abonnement!: Subscription;
+  tcEventSub!: Subscription;
 
-  constructor(private voteService: VoteService) {}
+  constructor(
+    private voteService: VoteService,
+    private tcEventService: TCEventService
+  ) {}
 
   ngOnInit(): void {
-    // this.listeVotes = this.voteService.getListeVotes();
-    this.getVoteHistory();
-    this.voteService.abonner().subscribe(() => this.getVoteHistory());
+    this.refresh();
+    this.abonnement = this.voteService.abonner().subscribe(() => {
+      this.refresh();
+    });
+    this.tcEventSub = this.tcEventService
+      .getTCEventObs()
+      .pipe(filter((tcEvt) => tcEvt === TCEvent.REFRESH))
+      .subscribe(() => this.refresh());
   }
 
-  getVoteHistory(): void {
-    this.abonnement = this.voteService
+  refresh() {
+    this.voteService
       .getVoteList()
-      .subscribe((clicAddVote) => {
-        this.listeVotes = clicAddVote;
-      });
+      .subscribe((votesServeur) => (this.listeVotes = votesServeur));
   }
 
   supprimer(i: number) {
@@ -38,5 +47,6 @@ export class VotingHistoryComponent implements OnInit, OnDestroy {
     if (this.abonnement) {
       this.abonnement.unsubscribe();
     }
+    this.tcEventSub.unsubscribe();
   }
 }

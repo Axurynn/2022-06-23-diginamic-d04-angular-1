@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { LikeHate } from 'src/app/models/like-hate';
 import { VoteService } from 'src/app/providers/vote.service';
 
 @Component({
@@ -16,18 +17,8 @@ export class CounterComponent implements OnInit, OnDestroy {
   constructor(private voteService: VoteService) {}
 
   ngOnInit(): void {
-    // this.abonnement = this.voteService.getVoteList().subscribe((listeVotes) => {
-    //   listeVotes.forEach((vote) => {
-    //     // console.log(vote);
-    //     if (vote.vote === 'LIKE') {
-    //       this.totalVotesUp += 1;
-    //     } else {
-    //       this.totalVotesDown += 1;
-    //     }
-    //   });
-    // });
-    this.voteService.abonner().subscribe((vote) => {
-      if (vote.vote === 'LIKE') {
+    this.abonnement = this.voteService.abonner().subscribe((clicAddVote) => {
+      if (clicAddVote.vote === LikeHate.LIKE) {
         this.totalVotesUp += 1;
       } else {
         this.totalVotesDown += 1;

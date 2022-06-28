@@ -1,5 +1,4 @@
 export interface Colleague {
-  id: number;
   pseudo: string;
   score: number;
   photo: string;
@@ -8,4 +7,11 @@ export interface Colleague {
 export interface FullColleague extends Colleague {
   first: string;
   last: string;
+}
+
+export interface NewColleague {
+  pseudo: string;
+  last: string;
+  first: string;
+  photo: string;
 }

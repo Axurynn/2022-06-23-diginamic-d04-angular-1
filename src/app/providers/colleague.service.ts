@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Colleague } from '../models/colleague';
+import { Colleague, FullColleague, NewColleague } from '../models/colleague';
 import { HttpClient } from '@angular/common/http';
 
 const COLLEAGUES_URL = 'https://colleagues-app.herokuapp.com/api/v2/colleagues';
@@ -14,5 +14,23 @@ export class ColleagueService {
   getColleaguesList(): Observable<Colleague[]> {
     // GET https://colleagues-app.herokuapp.com/api/v2/colleagues
     return this.http.get<Colleague[]>(COLLEAGUES_URL);
+  }
+
+  /* POST /colleagues
+    {
+      "pseudo": "test",
+      "last": "RENOTONSS",
+      "first": "EtienneSSS",
+      "photo": "https://randomuser.me/api/portraits/men/79.jpg",
+      "score": 100
+    }
+  */
+  createNewColleague(newColleague: NewColleague): Observable<FullColleague> {
+    return this.http.post<FullColleague>(COLLEAGUES_URL, {
+      pseudo: newColleague.pseudo,
+      first: newColleague.first,
+      last: newColleague.last,
+      photo: newColleague.photo,
+    });
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { filter, Observable, Subscription } from 'rxjs';
 import { LikeHate } from 'src/app/models/like-hate';
+import { TCEvent } from 'src/app/models/tcevent';
+import { TCEventService } from 'src/app/providers/tcevent.service';
 import { VoteService } from 'src/app/providers/vote.service';
 
 @Component({
@@ -13,8 +15,12 @@ export class CounterComponent implements OnInit, OnDestroy {
   totalVotesDown: number = 0;
 
   abonnement!: Subscription;
+  tcEventSub!: Subscription;
 
-  constructor(private voteService: VoteService) {}
+  constructor(
+    private voteService: VoteService,
+    private tcEventService: TCEventService
+  ) {}
 
   ngOnInit(): void {
     this.abonnement = this.voteService.abonner().subscribe((clicAddVote) => {
@@ -24,11 +30,20 @@ export class CounterComponent implements OnInit, OnDestroy {
         this.totalVotesDown += 1;
       }
     });
+    this.tcEventSub = this.tcEventService
+      .getTCEventObs()
+      .pipe(filter((tcEvt) => tcEvt === TCEvent.REFRESH))
+      .subscribe(() => this.refresh());
   }
 
   ngOnDestroy(): void {
     if (this.abonnement) {
       this.abonnement.unsubscribe();
     }
+  }
+
+  refresh() {
+    this.totalVotesDown = 0;
+    this.totalVotesUp = 0;
   }
 }

@@ -1,31 +1,38 @@
 <div class="container mb-3">
   <h2>Créer un collègue</h2>
   <form tcFirstLastValidator method="post" #statutForm="ngForm">
-    <p *ngIf="checkFirstLast(statutForm) && !statutNom.pristine && !statutPrenom.pristine">Le nom et le prénom ne
+    <p class="text-danger fst-italic"
+      *ngIf="checkFirstLast(statutForm) && !statutNom.pristine && !statutPrenom.pristine">Le nom et
+      le prénom ne
       peuvent pas être identiques.</p>
     <div class="form-group mb-3">
       <label for="pseudo">Pseudo</label>
       <input #statutPseudo="ngModel" type="text" class="form-control" id="pseudo" name="pseudo" required
         [(ngModel)]="newColleague.pseudo">
-      <p *ngIf="statutPseudo.dirty && statutPseudo.invalid">Le pseudo est requis.</p>
+      <p class="text-danger fst-italic" *ngIf="statutPseudo.dirty && statutPseudo.invalid">Le pseudo est requis.</p>
     </div>
     <div class="form-group mb-3">
       <label for="last">Nom</label>
       <input #statutNom="ngModel" type="text" class="form-control" id="last" name="last" required minlength="2"
         [(ngModel)]="newColleague.last">
-      <p *ngIf="statutNom.dirty && statutNom.invalid">Le nom avec un minimum de 2 caractères est requis.</p>
+      <p class="text-danger fst-italic" *ngIf="statutNom.dirty && statutNom.invalid">Le nom avec un minimum de 2
+        caractères est
+        requis.</p>
     </div>
     <div class="form-group mb-3">
       <label for="first">Prénom</label>
       <input #statutPrenom="ngModel" type="text" class="form-control" id="first" name="first" required minlength="2"
         [(ngModel)]="newColleague.first">
-      <p *ngIf="statutPrenom.dirty && statutPrenom.invalid">Le prénom avec un minimum de 2 caractères est requis.</p>
+      <p class="text-danger fst-italic" *ngIf="statutPrenom.dirty && statutPrenom.invalid">Le prénom avec un minimum de
+        2
+        caractères est requis.</p>
     </div>
     <div class="form-group mb-3">
       <label for="photo">Photo URL</label>
       <input #statutPhoto="ngModel" type="text" class="form-control" id="photo" name="photo" required
         [(ngModel)]="newColleague.photo">
-      <p *ngIf="statutPhoto.dirty && statutPhoto.invalid">L'URL de la photo est requis.</p>
+      <p class="text-danger fst-italic" *ngIf="statutPhoto.dirty && statutPhoto.invalid">L'URL de la photo est requis.
+      </p>
     </div>
     <button type="submit" class="btn btn-outline-dark" (click)="valider()"
       [disabled]="!statutForm.valid">Ajouter</button>

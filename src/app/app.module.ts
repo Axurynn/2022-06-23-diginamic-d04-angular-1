@@ -1,3 +1,4 @@
+import { CreateColleagueReactiveModule } from './pages/create-colleague-reactive/create-colleague-reactive.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -9,7 +10,13 @@ import { FirstLastValidatorDirective } from './shared/validators/first-last-vali
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, SharedModule, WelcomeModule, CreateColleagueModule],
+  imports: [
+    BrowserModule,
+    SharedModule,
+    WelcomeModule,
+    CreateColleagueModule,
+    CreateColleagueReactiveModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,32 @@
+<div class="container mb-3">
+  <h2>Créer un collègue - ReactiveFormsModule </h2>
+  <form method="post" [formGroup]="colForm">
+    <div class="form-group mb-3">
+      <label for="pseudo">Pseudo</label>
+      <input type="text" class="form-control" id="pseudo" name="pseudo" formControlName="pseudo">
+      <p class="text-danger fst-italic" *ngIf="checkFields('pseudo')">
+        Le pseudo est requis.</p>
+    </div>
+    <div class="form-group mb-3">
+      <label for="last">Nom</label>
+      <input type="text" class="form-control" id="last" name="last" formControlName="last">
+      <p class="text-danger fst-italic" *ngIf="checkFields('last')">Le nom avec un minimum de 2
+        caractères est
+        requis.</p>
+    </div>
+    <div class="form-group mb-3">
+      <label for="first">Prénom</label>
+      <input type="text" class="form-control" id="first" name="first" formControlName="first">
+      <p class="text-danger fst-italic" *ngIf="checkFields('first')">Le prénom avec un minimum de
+        2
+        caractères est requis.</p>
+    </div>
+    <div class="form-group mb-3">
+      <label for="photo">Photo URL</label>
+      <input type="text" class="form-control" id="photo" name="photo" formControlName="photo">
+      <p class="text-danger fst-italic" *ngIf="checkFields('photo')">L'URL de la photo est requis.
+      </p>
+    </div>
+    <button type="submit" class="btn btn-outline-dark" (click)="valider()">Ajouter</button>
+  </form>
+</div>

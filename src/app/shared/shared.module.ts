@@ -8,8 +8,9 @@ import { VotingHistoryComponent } from '../shared/components/voting-history/voti
 import { CounterComponent } from '../shared/components/counter/counter.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateColleagueFormsComponent } from './components/create-colleague-forms/create-colleague-forms.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FirstLastValidatorDirective } from './validators/first-last-validator.directive';
+import { CreateColleagueReactiveFormsComponent } from './components/create-colleague-reactive-forms/create-colleague-reactive-forms.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,9 @@ import { FirstLastValidatorDirective } from './validators/first-last-validator.d
     CounterComponent,
     CreateColleagueFormsComponent,
     FirstLastValidatorDirective,
+    CreateColleagueReactiveFormsComponent,
   ],
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   exports: [
     LikeHateComponent,
     ColleagueComponent,
@@ -31,6 +33,7 @@ import { FirstLastValidatorDirective } from './validators/first-last-validator.d
     VotingHistoryComponent,
     CounterComponent,
     CreateColleagueFormsComponent,
+    CreateColleagueReactiveFormsComponent,
   ],
 })
 export class SharedModule {}

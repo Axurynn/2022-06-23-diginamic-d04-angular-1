@@ -16,6 +16,10 @@ export class ColleagueService {
     return this.http.get<Colleague[]>(COLLEAGUES_URL);
   }
 
+  getColleagueByPseudo(pseudo: string): Observable<FullColleague> {
+    return this.http.get<FullColleague>(`${COLLEAGUES_URL}/${pseudo}`);
+  }
+
   /* POST /colleagues
     {
       "pseudo": "test",

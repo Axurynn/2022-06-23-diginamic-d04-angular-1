@@ -1,10 +1,12 @@
 <div class="container mb-3">
   <h2>Créer un collègue</h2>
-  <form tcFirstLastValidator method="post" #statutForm="ngForm">
+  <form tcFirstLastValidator tcPseudoValidator method="post" #statutForm="ngForm">
     <p class="text-danger fst-italic"
       *ngIf="checkFirstLast(statutForm) && !statutNom.pristine && !statutPrenom.pristine">Le nom et
       le prénom ne
       peuvent pas être identiques.</p>
+    <p class="text-danger fst-italic" *ngIf="checkPseudo(statutForm) && !statutPseudo.pristine">Le pseudo est déjà
+      utilisé.</p>
     <div class="form-group mb-3">
       <label for="pseudo">Pseudo</label>
       <input #statutPseudo="ngModel" type="text" class="form-control" id="pseudo" name="pseudo" required
@@ -35,6 +37,6 @@
       </p>
     </div>
     <button type="submit" class="btn btn-outline-dark" (click)="valider()"
-      [disabled]="!statutForm.valid">Ajouter</button>
+      [disabled]="statutForm.invalid">Ajouter</button>
   </form>
 </div>

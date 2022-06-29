@@ -11,6 +11,7 @@ import { CreateColleagueFormsComponent } from './components/create-colleague-for
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FirstLastValidatorDirective } from './validators/first-last-validator.directive';
 import { CreateColleagueReactiveFormsComponent } from './components/create-colleague-reactive-forms/create-colleague-reactive-forms.component';
+import { PseudoValidatorDirective } from './validators/pseudo-validator.directive';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CreateColleagueReactiveFormsComponent } from './components/create-colle
     CreateColleagueFormsComponent,
     FirstLastValidatorDirective,
     CreateColleagueReactiveFormsComponent,
+    PseudoValidatorDirective,
   ],
   imports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   exports: [

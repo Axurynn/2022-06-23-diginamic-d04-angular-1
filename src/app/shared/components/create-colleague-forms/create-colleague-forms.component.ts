@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { NewColleague } from 'src/app/models/colleague';
 import { ColleagueService } from 'src/app/providers/colleague.service';
 
@@ -20,7 +20,7 @@ export class CreateColleagueFormsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  valider() {
+  valider(): void {
     this.colleagueService
       .createNewColleague(this.newColleague)
       .subscribe((col) => {
@@ -32,5 +32,15 @@ export class CreateColleagueFormsComponent implements OnInit {
       first: '',
       photo: '',
     };
+  }
+
+  checkFirstLast(statutForm: NgForm): boolean {
+    if (statutForm.errors === null) {
+      return false;
+    } else if ('firstLast' in statutForm.errors) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

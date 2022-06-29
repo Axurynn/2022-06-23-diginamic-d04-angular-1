@@ -1,6 +1,8 @@
 <div class="container mb-3">
   <h2>Créer un collègue</h2>
-  <form method="post" #statutForm="ngForm">
+  <form tcFirstLastValidator method="post" #statutForm="ngForm">
+    <p *ngIf="checkFirstLast(statutForm) && !statutNom.pristine && !statutPrenom.pristine">Le nom et le prénom ne
+      peuvent pas être identiques.</p>
     <div class="form-group mb-3">
       <label for="pseudo">Pseudo</label>
       <input #statutPseudo="ngModel" type="text" class="form-control" id="pseudo" name="pseudo" required

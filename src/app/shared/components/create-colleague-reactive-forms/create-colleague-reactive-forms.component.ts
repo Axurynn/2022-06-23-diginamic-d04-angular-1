@@ -1,7 +1,15 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NewColleague } from 'src/app/models/colleague';
 import { ColleagueService } from 'src/app/providers/colleague.service';
+import { FirstLastValidatorDirective } from '../../validators/first-last-validator.directive';
 
 @Component({
   selector: 'tc-create-colleague-reactive-forms',
@@ -10,6 +18,7 @@ import { ColleagueService } from 'src/app/providers/colleague.service';
 })
 export class CreateColleagueReactiveFormsComponent implements OnInit {
   colForm: FormGroup;
+
   newColleague: NewColleague = {
     pseudo: '',
     last: '',
@@ -17,16 +26,22 @@ export class CreateColleagueReactiveFormsComponent implements OnInit {
     photo: '',
   };
 
-  constructor(
-    private fb: FormBuilder,
-    private colleagueService: ColleagueService
-  ) {
-    this.colForm = fb.group({
-      pseudo: ['', [Validators.required]],
-      last: ['', [Validators.required, Validators.minLength(2)]],
-      first: ['', [Validators.required, Validators.minLength(2)]],
-      photo: ['', [Validators.required]],
-    });
+  constructor(private colleagueService: ColleagueService) {
+    this.colForm = new FormGroup(
+      {
+        pseudo: new FormControl('', [Validators.required]),
+        last: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+        ]),
+        first: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+        ]),
+        photo: new FormControl('', [Validators.required]),
+      },
+      [this.checkFirstLast]
+    );
   }
 
   ngOnInit(): void {}
@@ -50,5 +65,24 @@ export class CreateColleagueReactiveFormsComponent implements OnInit {
     return (
       this.colForm.controls[name].invalid && this.colForm.controls[name].dirty
     );
+  }
+
+  checkFirstLast(control: AbstractControl): ValidationErrors | null {
+    if (
+      control.get('first')?.value === control.get('last')?.value &&
+      control.get('first')?.dirty &&
+      control.get('last')?.dirty
+    ) {
+      return { firstLast: 'first name must be different from lastname' };
+    } else {
+      return null;
+    }
+  }
+
+  get first() {
+    return this.colForm.value('first');
+  }
+  get last() {
+    return this.colForm.value('last');
   }
 }

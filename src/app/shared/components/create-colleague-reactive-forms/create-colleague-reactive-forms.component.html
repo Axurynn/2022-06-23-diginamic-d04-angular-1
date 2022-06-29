@@ -1,6 +1,9 @@
 <div class="container mb-3">
   <h2>Créer un collègue - ReactiveFormsModule </h2>
   <form method="post" [formGroup]="colForm">
+    <p class="text-danger fst-italic" *ngIf="checkFirstLast(colForm)">Le nom et
+      le prénom ne
+      peuvent pas être identiques.</p>
     <div class="form-group mb-3">
       <label for="pseudo">Pseudo</label>
       <input type="text" class="form-control" id="pseudo" name="pseudo" formControlName="pseudo">

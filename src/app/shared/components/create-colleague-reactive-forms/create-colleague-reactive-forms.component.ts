@@ -1,6 +1,5 @@
 import {
   AbstractControl,
-  FormBuilder,
   FormControl,
   FormGroup,
   ValidationErrors,
@@ -9,7 +8,6 @@ import {
 import { Component, OnInit } from '@angular/core';
 import { NewColleague } from 'src/app/models/colleague';
 import { ColleagueService } from 'src/app/providers/colleague.service';
-import { FirstLastValidatorDirective } from '../../validators/first-last-validator.directive';
 import { catchError, map, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -20,13 +18,6 @@ import { Router } from '@angular/router';
 })
 export class CreateColleagueReactiveFormsComponent implements OnInit {
   colForm: FormGroup;
-
-  // newColleague: NewColleague = {
-  //   pseudo: '',
-  //   last: '',
-  //   first: '',
-  //   photo: '',
-  // };
 
   constructor(
     private colleagueService: ColleagueService,

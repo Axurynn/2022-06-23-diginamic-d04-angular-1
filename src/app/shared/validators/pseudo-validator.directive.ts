@@ -4,7 +4,7 @@ import {
   NG_ASYNC_VALIDATORS,
   ValidationErrors,
 } from '@angular/forms';
-import { from, map, Observable, of } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { FullColleague } from 'src/app/models/colleague';
 import { ColleagueService } from 'src/app/providers/colleague.service';
 

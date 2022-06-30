@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, OnDestroy, DoCheck } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { filter, Subscription } from 'rxjs';
-import { Colleague } from 'src/app/models/colleague';
 import { TCEvent } from 'src/app/models/tcevent';
 import { Vote } from 'src/app/models/vote';
 import { TCEventService } from 'src/app/providers/tcevent.service';

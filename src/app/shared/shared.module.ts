@@ -12,7 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FirstLastValidatorDirective } from './validators/first-last-validator.directive';
 import { CreateColleagueReactiveFormsComponent } from './components/create-colleague-reactive-forms/create-colleague-reactive-forms.component';
 import { PseudoValidatorDirective } from './validators/pseudo-validator.directive';
-import { MenuComponentComponent } from './components/menu-component/menu-component.component';
 
 @NgModule({
   declarations: [

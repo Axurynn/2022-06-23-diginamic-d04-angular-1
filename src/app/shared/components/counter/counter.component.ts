@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { filter, Observable, Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { LikeHate } from 'src/app/models/like-hate';
 import { TCEvent } from 'src/app/models/tcevent';
 import { TCEventService } from 'src/app/providers/tcevent.service';

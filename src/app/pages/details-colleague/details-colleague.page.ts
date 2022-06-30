@@ -10,7 +10,13 @@ import { ColleagueService } from 'src/app/providers/colleague.service';
 })
 export class DetailsColleaguePage implements OnInit {
   pseudo: any;
-  colleague!: FullColleague;
+  colleague: FullColleague = {
+    first: '',
+    last: '',
+    pseudo: '',
+    score: 0,
+    photo: '',
+  };
 
   constructor(
     private activatedRoute: ActivatedRoute,

@@ -7,8 +7,9 @@
     <div class="form-group mb-3">
       <label for="pseudo">Pseudo</label>
       <input type="text" class="form-control" id="pseudo" name="pseudo" formControlName="pseudo">
-      <p class="text-danger fst-italic" *ngIf="checkFields('pseudo')">
+      <p class="text-danger fst-italic" *ngIf="checkInvalidPseudo">
         Le pseudo est requis.</p>
+      <p class="text-danger fst-italic" *ngIf="checkExistingPseudo">Le pseudo existe déjà.</p>
     </div>
     <div class="form-group mb-3">
       <label for="last">Nom</label>

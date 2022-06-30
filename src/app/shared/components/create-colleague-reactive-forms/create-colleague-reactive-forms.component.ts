@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { NewColleague } from 'src/app/models/colleague';
 import { ColleagueService } from 'src/app/providers/colleague.service';
 import { FirstLastValidatorDirective } from '../../validators/first-last-validator.directive';
+import { catchError, map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'tc-create-colleague-reactive-forms',
@@ -19,17 +20,20 @@ import { FirstLastValidatorDirective } from '../../validators/first-last-validat
 export class CreateColleagueReactiveFormsComponent implements OnInit {
   colForm: FormGroup;
 
-  newColleague: NewColleague = {
-    pseudo: '',
-    last: '',
-    first: '',
-    photo: '',
-  };
+  // newColleague: NewColleague = {
+  //   pseudo: '',
+  //   last: '',
+  //   first: '',
+  //   photo: '',
+  // };
 
   constructor(private colleagueService: ColleagueService) {
     this.colForm = new FormGroup(
       {
-        pseudo: new FormControl('', [Validators.required]),
+        pseudo: new FormControl('', {
+          validators: [Validators.required],
+          asyncValidators: [this.checkPseudo.bind(this)],
+        }),
         last: new FormControl('', [
           Validators.required,
           Validators.minLength(2),
@@ -40,19 +44,22 @@ export class CreateColleagueReactiveFormsComponent implements OnInit {
         ]),
         photo: new FormControl('', [Validators.required]),
       },
-      [this.checkFirstLast]
+      { validators: [this.checkFirstLast], updateOn: 'blur' }
     );
   }
 
   ngOnInit(): void {}
 
   valider(): void {
-    this.newColleague = this.colForm.value;
-    this.colleagueService
-      .createNewColleague(this.newColleague)
-      .subscribe((col) => {
-        this.newColleague = col;
-      });
+    let newColleague: NewColleague = {
+      pseudo: this.colForm.get('pseudo')?.value,
+      last: this.colForm.get('last')?.value,
+      first: this.colForm.get('first')?.value,
+      photo: this.colForm.get('photo')?.value,
+    };
+    this.colleagueService.createNewColleague(newColleague).subscribe((col) => {
+      newColleague = col;
+    });
     this.colForm.setValue({
       pseudo: '',
       last: '',
@@ -73,10 +80,41 @@ export class CreateColleagueReactiveFormsComponent implements OnInit {
       control.get('first')?.dirty &&
       control.get('last')?.dirty
     ) {
-      return { firstLast: 'first name must be different from lastname' };
+      return { firstLast: 'firstname must be different from lastname' };
     } else {
       return null;
     }
+  }
+
+  checkPseudo(control: AbstractControl): Observable<ValidationErrors | null> {
+    // implémenter la validation
+    // La requête HTTP GET API_URL/colleagues/PSEUDO
+    // Si le pseudo existe, retourner Observable<ValidationErrors>
+    // Si le pseudo n'existe pas, retourner Observable<null>
+    if (control.value === null) {
+      return of(null);
+    }
+    return this.checkIfPseudoExists(control.value).pipe(
+      map(() => {
+        return <ValidationErrors>{ InvalidPseudo: 'Ce pseudo existe déjà' };
+      }),
+      catchError(() => of(null))
+    );
+  }
+
+  checkIfPseudoExists(value: string) {
+    return this.colleagueService.getColleagueByPseudo(value);
+  }
+
+  get checkInvalidPseudo() {
+    return (
+      this.colForm.controls['pseudo'].dirty &&
+      this.colForm.controls['pseudo'].hasError('required')
+    );
+  }
+
+  get checkExistingPseudo() {
+    return this.colForm.controls['pseudo'].hasError('InvalidPseudo');
   }
 
   get first() {

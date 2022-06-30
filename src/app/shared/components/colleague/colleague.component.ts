@@ -4,6 +4,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Vote } from 'src/app/models/vote';
 import { LikeHate } from 'src/app/models/like-hate';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tc-colleague',
@@ -15,7 +16,7 @@ export class ColleagueComponent implements OnInit, OnDestroy {
   @Input() colleague!: Colleague;
   abonnement!: Subscription;
 
-  constructor(private voteService: VoteService) {}
+  constructor(private voteService: VoteService, private router: Router) {}
 
   ngOnInit(): void {
     this.abonnement = this.voteService.abonner().subscribe((clicAddVote) => {
@@ -33,5 +34,9 @@ export class ColleagueComponent implements OnInit, OnDestroy {
     this.voteService.addVote(this.colleague, event).subscribe((fullCol) => {
       this.colleague.score = fullCol.score;
     });
+  }
+
+  goToProfile() {
+    this.router.navigateByUrl(`/colleagues/${this.colleague.pseudo}`);
   }
 }

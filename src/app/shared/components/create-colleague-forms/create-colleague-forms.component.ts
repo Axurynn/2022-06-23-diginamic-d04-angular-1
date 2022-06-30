@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NewColleague } from 'src/app/models/colleague';
 import { ColleagueService } from 'src/app/providers/colleague.service';
 
@@ -16,7 +17,10 @@ export class CreateColleagueFormsComponent implements OnInit {
     photo: '',
   };
 
-  constructor(private colleagueService: ColleagueService) {}
+  constructor(
+    private colleagueService: ColleagueService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -32,6 +36,7 @@ export class CreateColleagueFormsComponent implements OnInit {
       first: '',
       photo: '',
     };
+    this.router.navigateByUrl(`/`);
   }
 
   checkFirstLast(statutForm: NgForm): boolean {

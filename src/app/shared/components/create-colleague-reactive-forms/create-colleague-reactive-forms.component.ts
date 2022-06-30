@@ -11,6 +11,7 @@ import { NewColleague } from 'src/app/models/colleague';
 import { ColleagueService } from 'src/app/providers/colleague.service';
 import { FirstLastValidatorDirective } from '../../validators/first-last-validator.directive';
 import { catchError, map, Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tc-create-colleague-reactive-forms',
@@ -27,7 +28,10 @@ export class CreateColleagueReactiveFormsComponent implements OnInit {
   //   photo: '',
   // };
 
-  constructor(private colleagueService: ColleagueService) {
+  constructor(
+    private colleagueService: ColleagueService,
+    private router: Router
+  ) {
     this.colForm = new FormGroup(
       {
         pseudo: new FormControl('', {
@@ -66,6 +70,7 @@ export class CreateColleagueReactiveFormsComponent implements OnInit {
       first: '',
       photo: '',
     });
+    this.router.navigateByUrl(`/`);
   }
 
   checkFields(name: string) {
